@@ -65,6 +65,7 @@
         </ul>
       </div>
 
+
       <div class="darkLight-searchBox">
         <div class="dark-light">
           <!-- Ícone Lua (SVG Nativo) -->
@@ -103,6 +104,225 @@
       </div>
     </div>
   </nav>
+
+   
+    <!-- 2. PRIMEIRA PARTE: BANNER VERDE (HERO BANNER) -->
+    <section class="hero-banner">
+      <div class="hero-content">
+          <h1>WE ARE EXPERTS</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+          <button class="btn-orange">READ MORE</button>
+      </div>
+  </section>
+
+  <!-- 3. SEGUNDA PARTE: VANTAGENS (OUR ADVANTAGES) -->
+  <section class="advantages-section">
+      <h2 class="section-title">OUR ADVANTAGES</h2>
+      
+      <div class="advantages-grid">
+          <!-- Vantagem 1 -->
+          <div class="advantage-item">
+              <div class="icon-circle">💡</div>
+              <h3>INNOVATION</h3>
+          </div>
+          <!-- Vantagem 2 -->
+          <div class="advantage-item">
+              <div class="icon-circle">👍</div>
+              <h3>QUALITY</h3>
+          </div>
+          <!-- Vantagem 3 -->
+          <div class="advantage-item">
+              <div class="icon-circle">⏱️</div>
+              <h3>EXPERIENCE</h3>
+          </div>
+          <!-- Vantagem 4 -->
+          <div class="advantage-item">
+              <div class="icon-circle">👥</div>
+              <h3>HAPPY CLIENTS</h3>
+          </div>
+          <!-- Vantagem 5 -->
+          <div class="advantage-item">
+              <div class="icon-circle">💬</div>
+              <h3>SUPPORT</h3>
+          </div>
+      </div>
+  </section>
+
+<style>
+  /* --- RESET E CONFIGURAÇÕES GERAIS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --green-theme: #1c982e;   /* Tom de verde exato do layout */
+    --text-dark: #333333;
+    --text-light: #777777;
+    --border-color: #e0e0e0;
+}
+
+/* --- ESTILOS DO MENU (HEADER) --- */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background-color: #ffffff;
+}
+
+.logo {
+    font-weight: 900;
+    font-size: 1.3rem;
+    color: var(--text-dark);
+    letter-spacing: 1px;
+}
+
+.logo-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: var(--green-theme);
+    margin-left: 3px;
+    border-radius: 50%;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-left: 20px;
+    transition: color 0.2s;
+}
+
+.nav-menu a:hover, .nav-menu a.active {
+    color: var(--green-theme);
+}
+
+
+/* --- ESTILOS DA PARTE 1: BANNER VERDE --- */
+.hero-banner {
+    background-color: var(--green-theme);
+    color: #ffffff;
+    text-align: center;
+    padding: 120px 20px;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.hero-content h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    opacity: 0.9;
+}
+
+.btn-orange {
+    background-color: #ff9800; /* Botão laranja de destaque */
+    color: white;
+    border: none;
+    padding: 14px 40px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: background 0.2s, transform 0.2s;
+}
+
+.btn-orange:hover {
+    background-color: #e68900;
+    transform: translateY(-2px);
+}
+
+
+/* --- ESTILOS DA PARTE 2: OUR ADVANTAGES --- */
+.advantages-section {
+    padding: 80px 8%;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 60px;
+    letter-spacing: 1px;
+}
+
+/* Container Grid para alinhar os 5 itens perfeitamente */
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Cria exatamente 5 colunas iguais */
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.advantage-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o círculo e o texto verticalmente */
+}
+
+/* O círculo cinza com borda fina */
+.icon-circle {
+    width: 75px;
+    height: 75px;
+    border: 1px solid var(--border-color);
+    background-color: #fafafa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem; /* Tamanho do ícone/emoji */
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+/* Efeito sutil ao passar o mouse nas vantagens */
+.advantage-item:hover .icon-circle {
+    border-color: var(--green-theme);
+    background-color: #ffffff;
+    box-shadow: 0 6px 15px rgba(124, 176, 65, 0.15);
+    transform: translateY(-5px);
+}
+
+.advantage-item h3 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #444444;
+    letter-spacing: 0.5px;
+}
+
+/* Responsividade Básica: Se a tela for pequena (celular), vira lista única */
+@media (max-width: 768px) {
+    .advantages-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .nav-menu {
+        display: none; /* Esconde o menu em telas muito pequenas para simplificar */
+    }
+}
+</style>
+
   <div class="main-layout">
 
     <!-- COLUNA DA ESQUERDA: Resumo do TCC -->
@@ -112,26 +332,36 @@
         <br>
         <br>
 
-        <h3>Um resumo sobre objetivo desse Portifólio.</h3>
+        <center>
+          <h3>Um resumo sobre objetivo desse Portifólio.</h3>
+        </center>
         <hr>
-        <p>
-          <strong>que é o projeto</strong> <br>
-          Este projeto é uma plataforma web responsiva dedicada à catalogação detalhada da biodiversidade vegetal
-          global.<br> O site funciona como um dicionário digital, organizando informações complexas de forma acessível e
-          intuitiva para o usuário final.<br>
-          <strong> Propósito e Contexto</strong>
+<br>
+        <center>
+        </center> <strong><h2> O que é o projeto</h2></strong>
+        <br>
+        Este projeto é uma plataforma web responsiva dedicada à catalogação detalhada da biodiversidade vegetal
+        global.<br> O site funciona como um dicionário digital, organizando informações complexas de forma acessível e
+        intuitiva para o usuário final.<br>
+        <strong>
+          <center>
+            <h2>Propósito e Contexto</h2>
+          </center>
+        </strong>
         <ul>
           <li> Trabalho de Conclusão de Curso (TCC) em Desenvolvimento de Sistemas.</li>
           <li> Democratizar o acesso ao conhecimento científico e popular sobre botânica.</li>
           <li>Centralizar dados dispersos em uma única base digital organizada.</li>
         </ul>
         <br>
-        <strong>Principais Funcionalidades</strong>
+        <strong>
+          <h2>Principais Funcionalidades</h2>
+        </strong>
         <ul>
-          <li> Catálogo completo: busca por nomes científicos e populares de plantas.</li>
-          <li> Guia de cultivo: instruções detalhadas sobre habitat e cuidados específicos.</li>
-          <li> Fichas técnicas: dados sobre propriedades medicinais ou alertas de toxicidade.</li>
-          <li> Interface responsiva: adaptada para navegação em celulares, tablets e computadores.<br></li>
+          <li><b>Catálogo completo:</b> Por nomes científicos e populares de plantas.</li>
+          <li><b>Guia de cultivo: </b>Instruções detalhadas sobre habitat e cuidados específicos.</li>
+          <li><b>Fichas técnicas:</b> Dados sobre propriedades medicinais ou alertas de toxicidade.</li>
+          <li><b> Interface responsiva:</b> Adaptada para navegação em celulares, tablets e computadores.<br></li>
         </ul>
 
 
@@ -1038,10 +1268,10 @@
         </table>
 
         <style>
-          h3 {
+          h2 {
             color: #000000;
             /* Preto puro devido ao fundo branco */
-            font-family: 'Times New Roman', Times, serif;
+            font-family: Arial, Helvetica, sans-serif;
             letter-spacing: normal;
             text-align: center;
             margin-top: 10px;
@@ -1050,7 +1280,7 @@
             transition: color 0.2s ease;
           }
 
-          body.dark h3 {
+          body.dark h2 {
             color: #ffffff;
             /* Fica branco automaticamente no modo escuro */
           }
@@ -1074,7 +1304,7 @@
           }
 
           #Agenda {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
@@ -1273,7 +1503,7 @@
       </div>
 
     </div>
-
+  
     <!-- FAIXA DE REDES SOCIAIS E COPYRIGHT -->
     <div class="rodape-inferior-barra">
       <div class="rodape-inferior-conteudo">
