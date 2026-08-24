@@ -75,9 +75,8 @@
                 </div>
                 <ul class="nav-links">
                     <li><a href="index.html">Início</a></li>
-                    <li><a href="#">Sobre</a></li>
-                    <li><a href="#">Produtos</a></li>
-                    <li><a href="portifolio.html">Portifólio</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="Produtos.html">Produtos</a></li>
                     <li><a href="#">Equipe</a></li>
                     <li><a href="#">Informações</a></li>
                     <li><a href="#">Dúvidas</a></li>
@@ -90,8 +89,25 @@
                     <!-- Ícone Lua (SVG Nativo) -->
                     <svg class="moon" viewBox="0 0 24 24"><path d="M12 11.807A9.002 9.002 0 0 1 10.049 2a9.944 9.944 0 0 0-5.244 2.193C.961 7.472.71 13.568 4.212 17.07c3.5 3.5 9.597 3.25 12.877-.594A9.943 9.943 0 0 0 19.28 11.23a9.006 9.006 0 0 1-7.28.577z"/></svg>
                     <!-- Ícone Sol (SVG Nativo) -->
-                    <svg class="sun" viewBox="0 0 24 24"><path d="M6.993 12c0 2.761 2.246 5 5.007 5s5.007-2.239 5.007-5-2.246-5-5.007-5-5.007 2.239-5.007 5zM11 2h2v3h-2zm0 14h2v3h-2zm-7-5h3v2H4zm13 0h3v2h-3zM5.637 5.635l2.121 2.122-1.414 1.414-2.122-2.122zm10.535 10.536 2.122 2.121-1.414 1.414-2.122-2.121zm-10.535 8.414l-2.122-2.122 1.414-1.414 2.122 2.122zm12.656-12.657 1.414-1.414 2.122 2.122-1.414 1.414z"/></svg>
-                </div>
+                    <svg class="sun" viewBox="0 0 100 100" width="100" height="100" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="square">
+                        <!-- Anel central vazado -->
+                        <circle cx="50" cy="50" r="22" />
+                      
+                        <!-- Raios com extremidades totalmente retas -->
+                        <g>
+                          <line x1="50" y1="8" x2="50" y2="18" /> <!-- Superior -->
+                          <line x1="50" y1="82" x2="50" y2="92" /> <!-- Inferior -->
+                          <line x1="8" y1="50" x2="18" y2="50" /> <!-- Esquerda -->
+                          <line x1="82" y1="50" x2="92" y2="50" /> <!-- Direita -->
+                          
+                          <!-- Raios diagonais -->
+                          <line x1="20.5" y1="20.5" x2="27.5" y2="27.5" /> <!-- Superior Esquerda -->
+                          <line x1="72.5" y1="72.5" x2="79.5" y2="79.5" /> <!-- Inferior Direita -->
+                          <line x1="20.5" y1="79.5" x2="27.5" y2="72.5" /> <!-- Inferior Esquerda -->
+                          <line x1="72.5" y1="27.5" x2="79.5" y2="20.5" /> <!-- Superior Direita -->
+                        </g>
+                      </svg>
+                                      </div>
                 <div class="searchBox">
                     <div class="searchToggle">
                         <!-- Ícone Cancelar X da Busca (SVG Nativo) -->
@@ -146,17 +162,84 @@
         <iframe src="contato.html"></iframe>
     </div>
 
-    <script>
-        // Função para abrir e fechar a janela do chat ao clicar no robô
-        function alternarJanelaIframe() {
-            const container = document.getElementById('containerIframeChat');
-            if (container.style.display === 'block') {
-                container.style.display = 'none';
-            } else {
-                container.style.display = 'block';
-            }
+ <script>
+    // Função para abrir e fechar a janela do chat ao clicar no robô
+    function alternarJanelaIframe() {
+        const container = document.getElementById('containerIframeChat');
+
+        if (container.style.display === 'block') {
+            container.style.display = 'none';
+        } else {
+            container.style.display = 'block';
         }
-    </script>
+    }
+
+
+    // =====================================================
+    // FECHAR AUTOMATICAMENTE AO CLICAR FORA DA JANELA
+    // =====================================================
+
+    document.addEventListener('click', function(event) {
+
+        const container =
+            document.getElementById('containerIframeChat');
+
+        const botaoRobo =
+            document.querySelector('.btn-abrir-chat-principal');
+
+
+        // Verifica se os elementos existem
+        if (!container || !botaoRobo) {
+            return;
+        }
+
+
+        // Se o chat estiver fechado, não faz nada
+        if (container.style.display !== 'block') {
+            return;
+        }
+
+
+        // Verifica se o clique aconteceu dentro da janela
+        const clicouDentroDaJanela =
+            container.contains(event.target);
+
+
+        // Verifica se o clique aconteceu no robozinho
+        const clicouNoRobo =
+            botaoRobo.contains(event.target);
+
+
+        // Se clicou fora da janela E fora do robozinho,
+        // fecha automaticamente
+        if (!clicouDentroDaJanela && !clicouNoRobo) {
+            container.style.display = 'none';
+        }
+
+    });
+
+
+    // =====================================================
+    // RECEBER COMANDO DE FECHAR DO contato.html
+    // =====================================================
+
+    window.addEventListener('message', function(event) {
+
+        if (event.data === 'fecharChat') {
+
+            const container =
+                document.getElementById('containerIframeChat');
+
+            if (container) {
+                container.style.display = 'none';
+            }
+
+        }
+
+    });
+
+</script>
+
 
     <script src="script.js"></script>
 
@@ -220,10 +303,10 @@
         border-radius: 12px; /* Cantos arredondados aplicados aqui */
         overflow: hidden; /* Garante que a foto interna também curve nos cantos superiores */
         z-index: 2;
-        transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transição para o efeito hover */
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; /* Adicionada transição para as cores */
     }
 
-    /* NOVO: Zoom e sombra extra ao passar o mouse no card */
+    /* Zoom e sombra extra ao passar o mouse no card */
     .meu-card-central-fixo:hover {
         transform: scale(1.04); /* Zoom suave idêntico ao pedido */
         box-shadow: 0 8px 30px rgba(0,0,0,0.15);
@@ -233,6 +316,7 @@
         text-decoration: none;
         color: #212529;
         display: block;
+        transition: color 0.2s;
     }
 
     .wrapper-foto-isolada {
@@ -279,12 +363,14 @@
         color: #888888;
         font-size: 14px;
         font-weight: bold;
+        transition: color 0.2s;
     }
 
     .info-card-isolado h3 {
         font-size: 18px;
         margin: 0 0 10px 0;
         font-weight: 500;
+        transition: color 0.2s;
     }
 
     .info-card-isolado p {
@@ -292,11 +378,13 @@
         font-size: 14px;
         line-height: 1.5;
         margin: 0 0 15px 0;
+        transition: color 0.2s;
     }
 
     .reviews-isoladas {
         color: #a3b1bf;
         font-size: 12px;
+        transition: color 0.2s;
     }
 
     /* Setas de Controle Laterais */
@@ -318,7 +406,7 @@
         transition: background-color 0.2s, transform 0.2s; /* Adicionada transição de transform */
     }
 
-    /* NOVO: Ajuste do hover mantendo o translateY essencial das setas */
+    /* Ajuste do hover mantendo o translateY essencial das setas */
     .seta-controle-fixa:hover {
         background-color: #4da31f;
         transform: translateY(-50%) scale(1.08); /* Zoom preservando a centralização vertical */
@@ -333,7 +421,42 @@
     /* Posicionamento das setas nas laterais do card */
     .seta-esq { left: calc(50% - 220px); }
     .seta-dir { right: calc(50% - 220px); }
+
+    /* ==================== CONFIGURAÇÃO DO MODO ESCURO (DARK MODE) ==================== */
+
+    /* Altera o fundo do card central fixo para cinza escuro e ajusta as bordas */
+    .dark .meu-card-central-fixo {
+        background: #1f1f1f !important;
+        border-color: #333333 !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    /* Muda a cor do link isolado para branco */
+    .dark .link-card-isolado {
+        color: #ffffff !important;
+    }
+
+    /* Deixa o título h3 do card totalmente branco */
+    .dark .info-card-isolado h3 {
+        color: #ffffff !important;
+    }
+
+    /* Deixa a descrição em parágrafo legível no fundo escuro */
+    .dark .info-card-isolado p {
+        color: #b0b8c4 !important;
+    }
+
+    /* Altera o texto do preço para um tom prata mais claro */
+    .dark .preco-isolado {
+        color: #cccccc !important;
+    }
+
+    /* Ajusta a legibilidade do contador de avaliações */
+    .dark .reviews-isoladas {
+        color: #7b8a99 !important;
+    }
 </style>
+
 
 <!-- ==================== JAVASCRIPT DE BANCO DE DADOS ISOLADO ==================== -->
 <script>
@@ -908,7 +1031,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s;
+  transition: transform 0.2s, background-color 0.2s, border-color 0.2s; /* Adicionada transição suave para as cores */
 }
 
 .carousel-card:hover {
@@ -979,10 +1102,7 @@
     text-decoration: none;
     color: #212529;
     display: block;
-}
-
-.carousel-info {
-    padding: 15px;
+    transition: color 0.2s;
 }
 
 .stars-price {
@@ -1000,12 +1120,14 @@
 .price {
     color: #888888; /* Cor cinza do preço */
     font-size: 14px;
+    transition: color 0.2s;
 }
 
 .carousel-info h3 {
     font-size: 18px;
     margin: 0 0 8px 0;
     font-weight: 500;
+    transition: color 0.2s;
 }
 
 .carousel-info p {
@@ -1013,16 +1135,56 @@
     font-size: 14px;
     line-height: 1.4;
     margin: 0 0 12px 0;
+    transition: color 0.2s;
 }
 
 .reviews {
     color: #a3b1bf;
     font-size: 12px;
+    transition: color 0.2s;
 }
 
+/* ==================== NOVO: ESTILOS PARA O MODO ESCURO (DARK MODE) ==================== */
 
+/* Altera a cor de fundo do card e adiciona uma borda sutil no tema escuro */
+.dark .carousel-card {
+    background-color: #1f1f1f !important;
+    border: 1px solid #333333 !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Altera a cor do texto do link no modo escuro */
+.dark .carousel-card-link {
+    color: #ffffff !important;
+}
+
+/* Deixa o título interno do produto branco */
+.dark .carousel-info h3 {
+    color: #ffffff !important;
+}
+
+/* Suaviza e clareia o parágrafo de descrição para ficar legível sobre o fundo escuro */
+.dark .carousel-info p {
+    color: #b0b8c4 !important;
+}
+
+/* Ajusta o texto cinza do preço para um tom prata brilhante */
+.dark .price {
+    color: #cccccc !important;
+}
+
+/* Destaca o texto do contador de avaliações */
+.dark .reviews {
+    color: #7b8a99 !important;
+}
+
+/* Altera a cor do título da categoria (Ex: Plantas de Sol) no modo escuro */
+.dark .carousel-categoria-titulo {
+    color: #ffffff !important;
+}
 
 </style>
+
 
 <link rel="stylesheet" href="style1.css">
 

@@ -143,7 +143,86 @@
       </div>
     </div>
 
-    <style>
+ <style>
+
+      /* ==================== CALENDÁRIO FLUTUANTE ==================== */
+      .btn-abrir-calendario {
+        position: fixed;
+        bottom: 105px;
+        right: 20px;
+        width: 70px;
+        height: 70px;
+        border: none;
+        border-radius: 50%;
+        background-color: #5cb82a;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        z-index: 9998;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        transition: transform 0.2s, background-color 0.2s;
+      }
+
+      .btn-abrir-calendario:hover {
+        background-color: #4da31f;
+        transform: scale(1.08);
+      }
+
+      .btn-abrir-calendario svg {
+        width: 42px;
+        height: 42px;
+        fill: #ffffff;
+      }
+
+      /* Quadrado reduzido e melhor adaptado para não vazar espaço */
+      .calendario-flutuante {
+        display: none !important;
+        position: fixed !important;
+        right: 20px !important; /* Alinhado perfeitamente na mesma margem dos botões */
+        bottom: 185px !important;
+        width: 320px !important; /* CORREÇÃO: Alterado de 280px para 320px conforme solicitado */
+        height: 380px !important; /* CORREÇÃO: Alterado de 330px para 380px conforme solicitado */
+        max-height: 500px !important;
+        overflow-y: auto !important;
+        box-sizing: border-box !important;
+        padding: 10px !important;
+        border-radius: 0 !important; /* Mantido exatamente como você mandou */
+        background: #ffffff !important;
+        box-shadow: 0 6px 25px rgba(0,0,0,0.35) !important;
+        z-index: 10000 !important;
+        float: none !important;
+      }
+
+      /* Alinhamento das proporções quando ativo */
+      .calendario-flutuante.aberto {
+        display: flex !important;
+        width: 320px !important; /* CORREÇÃO: Ajustado para o novo tamanho horizontal estável */
+        height: 380px !important; /* CORREÇÃO: Ajustado para o novo tamanho vertical estável */
+        max-height: 400px !important;
+        border-radius: 0 !important; /* Mantido exatamente como você mandou */
+      }
+
+      /* FORÇA A REMOÇÃO ESTREITA E EXCLUSIVA APENAS DO BOTÃO DO X */
+      .btn-fechar-calendario {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+
+      @media (max-width: 600px) {
+        .calendario-flutuante {
+          right: 10px !important;
+          bottom: 185px !important;
+          width: calc(100vw - 20px) !important;
+          max-width: 360px !important;
+          height: 480px !important;
+          max-height: 480px !important;
+        }
+      }
+
       /* ==================== ESTILOS DO CHAT / ROBÔ FLUTUANTE ==================== */
 
       /* BOTÃO FLUTUANTE DO CHAT (Círculo verde idêntico à imagem) */
@@ -192,13 +271,30 @@
 
       .janela-chat-iframe iframe {
         width: 400px;
-        height: 500px;
+        height: 480px;
         border: none;
         border-radius: 10px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         background-color: transparent !important;
       }
-    </style>
+</style>
+
+
+
+
+    <!-- BOTÃO FLUTUANTE DO CALENDÁRIO -->
+    <button
+      class="btn-abrir-calendario"
+      id="btnAbrirCalendario"
+      type="button"
+      onclick="alternarCalendario()"
+      aria-label="Abrir Calendário"
+      title="Calendário"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M19 4h-1V2h-2v2H8V2H6v2H5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm1 15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9h16v9zm0-11H4V7a1 1 0 0 1 1-1h1v2h2V6h8v2h2V6h1a1 1 0 0 1 1 1v1z"/>
+      </svg>
+    </button>
 
     <!-- ROBOZINHO IDÊNTICO À IMAGEM EM VETOR SVG -->
     <button class="btn-abrir-chat-principal" onclick="alternarJanelaIframe()" aria-label="Abrir Chatbot">
@@ -237,7 +333,49 @@
     </div>
 
     <script>
+      // ==================== CALENDÁRIO FLUTUANTE ====================
+
+      function alternarCalendario() {
+        const calendario = document.getElementById('janelaCalendario');
+
+        if (!calendario) return;
+
+        if (calendario.classList.contains('aberto')) {
+          fecharCalendario();
+        } else {
+          calendario.classList.add('aberto');
+        }
+      }
+
+      function fecharCalendario() {
+        const calendario = document.getElementById('janelaCalendario');
+
+        if (calendario) {
+          calendario.classList.remove('aberto');
+        }
+      }
+
+      // Fecha o calendário ao clicar fora dele.
+      document.addEventListener('click', function(event) {
+        const calendario = document.getElementById('janelaCalendario');
+        const botao = document.getElementById('btnAbrirCalendario');
+
+        if (!calendario || !botao) return;
+        if (!calendario.classList.contains('aberto')) return;
+
+        const clicouDentro =
+          calendario.contains(event.target);
+
+        const clicouNoBotao =
+          botao.contains(event.target);
+
+        if (!clicouDentro && !clicouNoBotao) {
+          fecharCalendario();
+        }
+      });
+
       // Função para abrir e fechar a janela do chat ao clicar no robô
+
       function alternarJanelaIframe() {
         const container = document.getElementById('containerIframeChat');
         if (container.style.display === 'block') {
@@ -246,10 +384,32 @@
           container.style.display = 'block';
         }
       }
+      // Função para abrir e fechar a caixinha branca ao clicar no botão verde do calendário
+function alternarCalendario() {
+    const calendario = document.querySelector('.calendario-flutuante');
+    if (calendario) {
+        calendario.classList.toggle('aberto');
+    }
+}
+
+// Fecha a caixinha branca se o usuário clicar em qualquer outro lugar fora dela
+document.addEventListener('mousedown', function(event) {
+    const calendario = document.querySelector('.calendario-flutuante');
+    const btnCalendario = document.getElementById('btnAbrirCalendario');
+    
+    // Se o calendário estiver aberto e o clique NÃO for nele e nem no botão verde, ele fecha
+    if (calendario && calendario.classList.contains('aberto')) {
+        if (!calendario.contains(event.target) && !btnCalendario.contains(event.target)) {
+            calendario.classList.remove('aberto');
+        }
+    }
+});
+
     </script>
 
     <!-- COLUNA DA DIREITA: Quadrado do Calendário Anual e as duas Setas -->
-    <div class="right-content">
+    <div class="right-content calendario-flutuante" id="janelaCalendario">
+      <button type="button" class="btn-fechar-calendario" onclick="fecharCalendario()" aria-label="Fechar calendário">×</button>
       <br>
       <br>
       <br>

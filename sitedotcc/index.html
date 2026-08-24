@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Style.css">
     <title>Solo em Equilíbrio</title>
+      
+      <link rel="icon" type="image/png" href="logotipo.png">
     <style>
         /* ==================== ESTILOS DO CHAT / ROBÔ FLUTUANTE ==================== */
         
@@ -75,9 +77,8 @@
                 </div>
                 <ul class="nav-links">
                     <li><a href="index.html">Início</a></li>
-                    <li><a href="#">Sobre</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
                     <li><a href="Produtos.html">Produtos</a></li>
-                    <li><a href="portifolio.html">Portifólio</a></li>
                     <li><a href="#">Equipe</a></li>
                     <li><a href="#">Informações</a></li>
                     <li><a href="#">Dúvidas</a></li>
@@ -145,17 +146,85 @@
         <iframe src="contato.html"></iframe>
     </div>
 
-    <script>
-        // Função para abrir e fechar a janela do chat ao clicar no robô
-        function alternarJanelaIframe() {
-            const container = document.getElementById('containerIframeChat');
-            if (container.style.display === 'block') {
-                container.style.display = 'none';
-            } else {
-                container.style.display = 'block';
-            }
+   <script>
+    // Função para abrir e fechar a janela do chat ao clicar no robô
+    function alternarJanelaIframe() {
+        const container = document.getElementById('containerIframeChat');
+
+        if (container.style.display === 'block') {
+            container.style.display = 'none';
+        } else {
+            container.style.display = 'block';
         }
-    </script>
+    }
+
+
+    // =====================================================
+    // FECHAR AUTOMATICAMENTE AO CLICAR FORA DA JANELA
+    // =====================================================
+
+    document.addEventListener('click', function(event) {
+
+        const container =
+            document.getElementById('containerIframeChat');
+
+        const botaoRobo =
+            document.querySelector('.btn-abrir-chat-principal');
+
+
+        // Verifica se os elementos existem
+        if (!container || !botaoRobo) {
+            return;
+        }
+
+
+        // Se o chat estiver fechado, não faz nada
+        if (container.style.display !== 'block') {
+            return;
+        }
+
+
+        // Verifica se o clique aconteceu dentro da janela
+        const clicouDentroDaJanela =
+            container.contains(event.target);
+
+
+        // Verifica se o clique aconteceu no robozinho
+        const clicouNoRobo =
+            botaoRobo.contains(event.target);
+
+
+        // Se clicou fora da janela E fora do robozinho,
+        // fecha automaticamente
+        if (!clicouDentroDaJanela && !clicouNoRobo) {
+            container.style.display = 'none';
+        }
+
+    });
+
+
+    // =====================================================
+    // RECEBER COMANDO DE FECHAR DO contato.html
+    // =====================================================
+
+    window.addEventListener('message', function(event) {
+
+        if (event.data === 'fecharChat') {
+
+            const container =
+                document.getElementById('containerIframeChat');
+
+            if (container) {
+                container.style.display = 'none';
+            }
+
+        }
+
+    });
+
+</script>
+
+<script src="script.js"></script>
 
     <script src="script.js"></script>
 </body>
